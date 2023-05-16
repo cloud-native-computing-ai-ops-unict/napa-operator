@@ -28,8 +28,11 @@ type AgentSubscriptionSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of AgentSubscription. Edit agentsubscription_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Description is description field of AgentSubscription
+	Description string `json:"description,omitempty"`
+
+	// SLO service target
+	OpenSLOService string `json:"openSLOService,omitempty"`
 }
 
 // AgentSubscriptionStatus defines the observed state of AgentSubscription

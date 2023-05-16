@@ -35,9 +35,11 @@ spec:
           spec:
             description: AgentSubscriptionSpec defines the desired state of AgentSubscription
             properties:
-              foo:
-                description: Foo is an example field of AgentSubscription. Edit agentsubscription_types.go
-                  to remove/update
+              description:
+                description: Description is description field of AgentSubscription
+                type: string
+              openSLOService:
+                description: SLO service target
                 type: string
             type: object
           status:
