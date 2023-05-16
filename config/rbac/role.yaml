@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - monitoring.cloud-native.ml
+  resources:
+  - agentsubscriptions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.cloud-native.ml
+  resources:
+  - agentsubscriptions/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.cloud-native.ml
+  resources:
+  - agentsubscriptions/status
+  verbs:
+  - get
+  - patch
+  - update

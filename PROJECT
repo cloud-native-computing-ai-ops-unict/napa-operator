@@ -10,4 +10,14 @@ plugins:
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: napa-operator
 repo: github.com/cloud-native-computing-ai-ops-unict/napa-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: cloud-native.ml
+  group: monitoring
+  kind: AgentSubscription
+  path: github.com/cloud-native-computing-ai-ops-unict/napa-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"
