@@ -1,27 +1,31 @@
-# permissions for end users to view agentsubscriptions.
+# permissions for end users to edit sloes.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: clusterrole
-    app.kubernetes.io/instance: agentsubscription-viewer-role
+    app.kubernetes.io/instance: slo-editor-role
     app.kubernetes.io/component: rbac
     app.kubernetes.io/created-by: napa-operator
     app.kubernetes.io/part-of: napa-operator
     app.kubernetes.io/managed-by: kustomize
-  name: agentsubscription-viewer-role
+  name: slo-editor-role
 rules:
 - apiGroups:
-  - monitoring.cloud-native.ml
+  - openslo.cloud-native.ml
   resources:
-  - agentsubscriptions
+  - sloes
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
-  - monitoring.cloud-native.ml
+  - openslo.cloud-native.ml
   resources:
-  - agentsubscriptions/status
+  - sloes/status
   verbs:
   - get

@@ -1,4 +1,4 @@
-apiVersion: monitoring.cloud-native.ml/v1alpha1
+apiVersion: napa.cloud-native.ml/v1alpha1
 kind: AgentSubscription
 metadata:
   labels:
@@ -9,4 +9,5 @@ metadata:
     app.kubernetes.io/created-by: napa-operator
   name: agentsubscription-sample
 spec:
+  foo: test
   # TODO(user): Add fields here

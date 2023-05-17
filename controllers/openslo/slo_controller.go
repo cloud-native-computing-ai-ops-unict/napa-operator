@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package controllers
+package openslo
 
 import (
 	"context"
@@ -24,29 +24,29 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	monitoringv1alpha1 "github.com/cloud-native-computing-ai-ops-unict/napa-operator/api/v1alpha1"
+	openslov1alpha1 "github.com/cloud-native-computing-ai-ops-unict/apis/openslo/v1alpha1"
 )
 
-// AgentSubscriptionReconciler reconciles a AgentSubscription object
-type AgentSubscriptionReconciler struct {
+// SLOReconciler reconciles a SLO object
+type SLOReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=monitoring.cloud-native.ml,resources=agentsubscriptions,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=monitoring.cloud-native.ml,resources=agentsubscriptions/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=monitoring.cloud-native.ml,resources=agentsubscriptions/finalizers,verbs=update
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the AgentSubscription object against the actual cluster state, and then
+// the SLO object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
-// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.14.1/pkg/reconcile
-func (r *AgentSubscriptionReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile
+func (r *SLOReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
@@ -55,8 +55,8 @@ func (r *AgentSubscriptionReconciler) Reconcile(ctx context.Context, req ctrl.Re
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *AgentSubscriptionReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *SLOReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&monitoringv1alpha1.AgentSubscription{}).
+		For(&openslov1alpha1.SLO{}).
 		Complete(r)
 }

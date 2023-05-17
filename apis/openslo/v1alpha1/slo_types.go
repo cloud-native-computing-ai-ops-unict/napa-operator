@@ -23,20 +23,17 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// AgentSubscriptionSpec defines the desired state of AgentSubscription
-type AgentSubscriptionSpec struct {
+// SLOSpec defines the desired state of SLO
+type SLOSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Description is description field of AgentSubscription
-	Description string `json:"description,omitempty"`
-
-	// SLO service target
-	OpenSLOService string `json:"openSLOService,omitempty"`
+	// Foo is an example field of SLO. Edit slo_types.go to remove/update
+	Foo string `json:"foo,omitempty"`
 }
 
-// AgentSubscriptionStatus defines the observed state of AgentSubscription
-type AgentSubscriptionStatus struct {
+// SLOStatus defines the observed state of SLO
+type SLOStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -44,24 +41,24 @@ type AgentSubscriptionStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// AgentSubscription is the Schema for the agentsubscriptions API
-type AgentSubscription struct {
+// SLO is the Schema for the sloes API
+type SLO struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   AgentSubscriptionSpec   `json:"spec,omitempty"`
-	Status AgentSubscriptionStatus `json:"status,omitempty"`
+	Spec   SLOSpec   `json:"spec,omitempty"`
+	Status SLOStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// AgentSubscriptionList contains a list of AgentSubscription
-type AgentSubscriptionList struct {
+// SLOList contains a list of SLO
+type SLOList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []AgentSubscription `json:"items"`
+	Items           []SLO `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&AgentSubscription{}, &AgentSubscriptionList{})
+	SchemeBuilder.Register(&SLO{}, &SLOList{})
 }

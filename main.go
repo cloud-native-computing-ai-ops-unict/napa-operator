@@ -31,8 +31,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	monitoringv1alpha1 "github.com/cloud-native-computing-ai-ops-unict/napa-operator/api/v1alpha1"
-	"github.com/cloud-native-computing-ai-ops-unict/napa-operator/controllers"
+	napav1alpha1 "github.com/cloud-native-computing-ai-ops-unict/apis/napa/v1alpha1"
+	openslov1alpha1 "github.com/cloud-native-computing-ai-ops-unict/apis/openslo/v1alpha1"
+	napacontrollers "github.com/cloud-native-computing-ai-ops-unict/controllers/napa"
+	openslocontrollers "github.com/cloud-native-computing-ai-ops-unict/controllers/openslo"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -44,7 +46,8 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(monitoringv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(openslov1alpha1.AddToScheme(scheme))
+	utilruntime.Must(napav1alpha1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -71,7 +74,7 @@ func main() {
 		Port:                   9443,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "32238c58.cloud-native.ml",
+		LeaderElectionID:       "50e9089e.cloud-native.ml",
 		// LeaderElectionReleaseOnCancel defines if the leader should step down voluntarily
 		// when the Manager ends. This requires the binary to immediately end when the
 		// Manager is stopped, otherwise, this setting is unsafe. Setting this significantly
@@ -89,7 +92,21 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controllers.AgentSubscriptionReconciler{
+	if err = (&openslocontrollers.SLIReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "SLI")
+		os.Exit(1)
+	}
+	if err = (&openslocontrollers.SLOReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "SLO")
+		os.Exit(1)
+	}
+	if err = (&napacontrollers.AgentSubscriptionReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
