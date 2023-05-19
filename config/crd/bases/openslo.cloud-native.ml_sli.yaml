@@ -35,10 +35,95 @@ spec:
           spec:
             description: SLISpec defines the desired state of SLI
             properties:
-              foo:
-                description: Foo is an example field of SLI. Edit sli_types.go to
-                  remove/update
-                type: string
+              ratioMetric:
+                description: RatioMetric represents the ratio metric.
+                properties:
+                  bad:
+                    description: MetricSourceHolder represents the metric source holder.
+                    properties:
+                      metricSource:
+                        description: MetricSource represents the metric source.
+                        properties:
+                          metricSourceRef:
+                            type: string
+                          spec:
+                            additionalProperties:
+                              type: string
+                            type: object
+                          type:
+                            type: string
+                        required:
+                        - spec
+                        type: object
+                    required:
+                    - metricSource
+                    type: object
+                  counter:
+                    type: boolean
+                  good:
+                    description: MetricSourceHolder represents the metric source holder.
+                    properties:
+                      metricSource:
+                        description: MetricSource represents the metric source.
+                        properties:
+                          metricSourceRef:
+                            type: string
+                          spec:
+                            additionalProperties:
+                              type: string
+                            type: object
+                          type:
+                            type: string
+                        required:
+                        - spec
+                        type: object
+                    required:
+                    - metricSource
+                    type: object
+                  total:
+                    description: MetricSourceHolder represents the metric source holder.
+                    properties:
+                      metricSource:
+                        description: MetricSource represents the metric source.
+                        properties:
+                          metricSourceRef:
+                            type: string
+                          spec:
+                            additionalProperties:
+                              type: string
+                            type: object
+                          type:
+                            type: string
+                        required:
+                        - spec
+                        type: object
+                    required:
+                    - metricSource
+                    type: object
+                required:
+                - counter
+                - total
+                type: object
+              thresholdMetric:
+                description: MetricSourceHolder represents the metric source holder.
+                properties:
+                  metricSource:
+                    description: MetricSource represents the metric source.
+                    properties:
+                      metricSourceRef:
+                        type: string
+                      spec:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      type:
+                        type: string
+                    required:
+                    - spec
+                    type: object
+                required:
+                - metricSource
+                type: object
             type: object
           status:
             description: SLIStatus defines the observed state of SLI
