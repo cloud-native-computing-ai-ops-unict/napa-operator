@@ -1,0 +1,216 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.1
+  creationTimestamp: null
+  name: sloes.openslo.cloud-native.ml
+spec:
+  group: openslo.cloud-native.ml
+  names:
+    kind: SLO
+    listKind: SLOList
+    plural: sloes
+    singular: slo
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: SLO is the Schema for the sloes API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SLOSpec defines the desired state of SLO
+            properties:
+              alertPolicies:
+                description: We don't make clear in the spec if this is a ref or inline.
+                  We will make it a ref for now. https://github.com/OpenSLO/OpenSLO/issues/133
+                items:
+                  type: string
+                type: array
+              budgetingMethod:
+                type: string
+              description:
+                type: string
+              indicator:
+                properties:
+                  metadata:
+                    type: object
+                  spec:
+                    description: SLISpec defines the desired state of SLI
+                    properties:
+                      ratioMetric:
+                        description: RatioMetric represents the ratio metric.
+                        properties:
+                          bad:
+                            description: MetricSourceHolder represents the metric
+                              source holder.
+                            properties:
+                              metricSource:
+                                description: MetricSource represents the metric source.
+                                properties:
+                                  metricSourceRef:
+                                    type: string
+                                  spec:
+                                    additionalProperties:
+                                      type: string
+                                    type: object
+                                  type:
+                                    type: string
+                                required:
+                                - spec
+                                type: object
+                            required:
+                            - metricSource
+                            type: object
+                          counter:
+                            type: boolean
+                          good:
+                            description: MetricSourceHolder represents the metric
+                              source holder.
+                            properties:
+                              metricSource:
+                                description: MetricSource represents the metric source.
+                                properties:
+                                  metricSourceRef:
+                                    type: string
+                                  spec:
+                                    additionalProperties:
+                                      type: string
+                                    type: object
+                                  type:
+                                    type: string
+                                required:
+                                - spec
+                                type: object
+                            required:
+                            - metricSource
+                            type: object
+                          total:
+                            description: MetricSourceHolder represents the metric
+                              source holder.
+                            properties:
+                              metricSource:
+                                description: MetricSource represents the metric source.
+                                properties:
+                                  metricSourceRef:
+                                    type: string
+                                  spec:
+                                    additionalProperties:
+                                      type: string
+                                    type: object
+                                  type:
+                                    type: string
+                                required:
+                                - spec
+                                type: object
+                            required:
+                            - metricSource
+                            type: object
+                        required:
+                        - counter
+                        - total
+                        type: object
+                      thresholdMetric:
+                        description: MetricSourceHolder represents the metric source
+                          holder.
+                        properties:
+                          metricSource:
+                            description: MetricSource represents the metric source.
+                            properties:
+                              metricSourceRef:
+                                type: string
+                              spec:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              type:
+                                type: string
+                            required:
+                            - spec
+                            type: object
+                        required:
+                        - metricSource
+                        type: object
+                    type: object
+                required:
+                - metadata
+                - spec
+                type: object
+              indicatorRef:
+                type: string
+              objectives:
+                items:
+                  description: Objective represents single threshold for SLO, for
+                    internal usage.
+                  properties:
+                    displayName:
+                      type: string
+                    op:
+                      type: string
+                    target:
+                      type: string
+                    timeSliceTarget:
+                      type: string
+                    timeSliceWindow:
+                      type: string
+                    value:
+                      type: string
+                  required:
+                  - target
+                  type: object
+                type: array
+              service:
+                type: string
+              timeWindow:
+                items:
+                  description: TimeWindow represents content of time window.
+                  properties:
+                    calendar:
+                      description: Calendar struct represents calendar time window.
+                      properties:
+                        startTime:
+                          type: string
+                        timeZone:
+                          type: string
+                      required:
+                      - startTime
+                      - timeZone
+                      type: object
+                    duration:
+                      type: string
+                    isRolling:
+                      type: boolean
+                  required:
+                  - duration
+                  - isRolling
+                  type: object
+                type: array
+            required:
+            - alertPolicies
+            - budgetingMethod
+            - objectives
+            - service
+            - timeWindow
+            type: object
+          status:
+            description: SLOStatus defines the observed state of SLO
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
