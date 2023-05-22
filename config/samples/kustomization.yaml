@@ -1,0 +1,6 @@
+## Append samples of your project ##
+resources:
+- napa_v1alpha1_agent.yaml
+- openslo_v1alpha1_slo.yaml
+- openslo_v1alpha1_sli.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

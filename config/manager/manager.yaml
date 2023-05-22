@@ -72,6 +72,10 @@ spec:
         - --leader-elect
         image: controller:latest
         name: manager
+        env:
+          - name: NAPA_AGENT_IMAGE
+            #TODO change me with napa-operand image
+            value: openshift/hello-openshift:v3.9.0
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

@@ -1,0 +1,85 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - napa.cloud-native.ml
+  resources:
+  - agents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - napa.cloud-native.ml
+  resources:
+  - agents/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - napa.cloud-native.ml
+  resources:
+  - agents/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slis
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slis/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slis/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slos
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slos/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - openslo.cloud-native.ml
+  resources:
+  - slos/status
+  verbs:
+  - get
+  - patch
+  - update

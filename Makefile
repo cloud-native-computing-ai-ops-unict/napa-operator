@@ -29,7 +29,7 @@ BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 #
 # For example, running 'make bundle-build bundle-push catalog-build catalog-push' will build and push both
 # cloud-native.ml/napa-operator-bundle:$VERSION and cloud-native.ml/napa-operator-catalog:$VERSION.
-IMAGE_TAG_BASE ?= cloud-native.ml/napa-operator
+IMAGE_TAG_BASE ?= quay.io/massigollo/napa-operator
 
 # BUNDLE_IMG defines the image:tag used for the bundle.
 # You can use it as an arg. (E.g make bundle-build BUNDLE_IMG=<some-registry>/<project-name-bundle>:<tag>)
@@ -47,7 +47,7 @@ ifeq ($(USE_IMAGE_DIGESTS), true)
 endif
 
 # Image URL to use all building/pushing image targets
-IMG ?= controller:latest
+IMG ?= $(IMAGE_TAG_BASE):$(VERSION)
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.26.0
 
@@ -258,3 +258,14 @@ catalog-build: opm ## Build a catalog image.
 .PHONY: catalog-push
 catalog-push: ## Push a catalog image.
 	$(MAKE) docker-push IMG=$(CATALOG_IMG)
+
+
+.PHONY: docker-build-local
+docker-build-local: test ## Build docker image with the manager.
+	docker build -t napa-operator-local:$(VERSION) .
+
+.PHONY: deploy-kind
+deploy-kind: manifests kustomize docker-build-local ## Deploy controller to the K8s cluster specified in ~/.kube/config.
+	cd config/manager && $(KUSTOMIZE) edit set image controller=napa-operator-local:$(VERSION)
+	kind load docker-image napa-operator-local:$(VERSION)
+	$(KUSTOMIZE) build config/default | kubectl apply -f -
