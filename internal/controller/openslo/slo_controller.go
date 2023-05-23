@@ -33,9 +33,9 @@ type SLOReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=slos,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=slos/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=slos/finalizers,verbs=update
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=openslo.cloud-native.ml,resources=sloes/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

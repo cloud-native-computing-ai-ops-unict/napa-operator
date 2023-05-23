@@ -3,8 +3,8 @@
 # It should be run by config/default
 resources:
 - bases/napa.cloud-native.ml_agents.yaml
-- bases/openslo.cloud-native.ml_slos.yaml
-- bases/openslo.cloud-native.ml_slis.yaml
+- bases/openslo.cloud-native.ml_sloes.yaml
+- bases/openslo.cloud-native.ml_sli.yaml
 #+kubebuilder:scaffold:crdkustomizeresource
 
 patchesStrategicMerge:
