@@ -39,4 +39,13 @@ resources:
   kind: SLI
   path: github.com/cloud-native-computing-ai-ops-unict/napa-operator/api/openslo/v1alpha1
   version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: cloud-native.ml
+  group: openslo
+  kind: Service
+  path: github.com/cloud-native-computing-ai-ops-unict/napa-operator/api/openslo/v1alpha1
+  version: v1alpha1
 version: "3"

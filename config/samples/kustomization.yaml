@@ -3,4 +3,5 @@ resources:
 - napa_v1alpha1_agent.yaml
 - openslo_v1alpha1_slo.yaml
 - openslo_v1alpha1_sli.yaml
+- openslo_v1alpha1_service.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples
