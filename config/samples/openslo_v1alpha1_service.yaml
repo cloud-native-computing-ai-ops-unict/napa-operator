@@ -9,4 +9,4 @@ metadata:
     app.kubernetes.io/created-by: napa-operator
   name: service-sample
 spec:
-  description: string # optional up to 1050 characters
+  description: sample openslo svc
