@@ -1,6 +1,7 @@
-## Append samples you want in your CSV to this file as resources ##
+## Append samples of your project ##
 resources:
-- openslo_v1alpha1_sli.yaml
+- napa_v1alpha1_agent.yaml
 - openslo_v1alpha1_slo.yaml
-- napa_v1alpha1_agentsubscription.yaml
+- openslo_v1alpha1_sli.yaml
+- openslo_v1alpha1_service.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples
