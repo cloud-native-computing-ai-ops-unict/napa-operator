@@ -20,35 +20,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type SLIInline struct {
-	Metadata metav1.ObjectMeta `json:"metadata" validate:"required"`
-	Spec     SLISpec           `json:"spec" validate:"required"`
-}
-
-// RatioMetric represents the ratio metric.
-type RatioMetric struct {
-	Counter bool                `json:"counter" example:"true"`
-	Good    *MetricSourceHolder `json:"good,omitempty" validate:"required_without=Bad"`
-	Bad     *MetricSourceHolder `json:"bad,omitempty" validate:"required_without=Good"`
-	Total   MetricSourceHolder  `json:"total" validate:"required"`
-}
-
-// MetricSourceHolder represents the metric source holder.
-type MetricSourceHolder struct {
-	MetricSource MetricSource `json:"metricSource" validate:"required"`
-}
-
-// MetricSource represents the metric source.
-type MetricSource struct {
-	MetricSourceRef  string            `json:"metricSourceRef,omitempty" validate:"required_without=MetricSourceSpec"`
-	Type             string            `json:"type,omitempty" validate:"required_without=MetricSourceRef"`
-	MetricSourceSpec map[string]string `json:"spec" validate:"required_without=MetricSourceRef"`
-}
+// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
+// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
 // SLISpec defines the desired state of SLI
 type SLISpec struct {
-	ThresholdMetric *MetricSourceHolder `json:"thresholdMetric,omitempty" validate:"required_without=RatioMetric"`
-	RatioMetric     *RatioMetric        `json:"ratioMetric,omitempty" validate:"required_without=ThresholdMetric"`
+	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
+	// Important: Run "make" to regenerate code after modifying this file
+
+	// Foo is an example field of SLI. Edit sli_types.go to remove/update
+	Foo string `json:"foo,omitempty"`
 }
 
 // SLIStatus defines the observed state of SLI
@@ -60,7 +41,7 @@ type SLIStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// SLI is the Schema for the sli API
+// SLI is the Schema for the slis API
 type SLI struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
